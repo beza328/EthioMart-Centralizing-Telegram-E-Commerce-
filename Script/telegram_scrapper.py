@@ -11,23 +11,23 @@ api_hash = os.getenv('TG_API_HASH')
 phone = os.getenv('phone')
 
 # Function to scrape data from a single channel
-async def scrape_channel(client, Fashiontera, writer, media_dir):
-    entity = await client.get_entity(Fashiontera)
+async def scrape_channel(client, ZemenExpress, writer, media_dir):
+    entity = await client.get_entity(ZemenExpress)
     channel_title = entity.title  # Extract the channel's title
     async for message in client.iter_messages(entity, limit=10000):
         media_path = None
         if message.media and hasattr(message.media, 'photo'):
             # Create a unique filename for the photo
-            filename = f"{Fashiontera}_{message.id}.jpg"
+            filename = f"{ZemenExpress}_{message.id}.jpg"
             media_path = os.path.join(media_dir, filename)
             # Download the media to the specified directory if it's a photo
             await client.download_media(message.media, media_path)
         
         # Write the channel title along with other data
-        writer.writerow([channel_title, Fashiontera, message.id, message.message, message.date, media_path])
+        writer.writerow([channel_title, ZemenExpress, message.id, message.message, message.date, media_path])
 
 # Initialize the client once
-client = TelegramClient('e-comerce_session', api_id, api_hash)
+client = TelegramClient('Scrapper_session', api_id, api_hash)
 
 async def main():
     await client.start()
@@ -39,11 +39,11 @@ async def main():
     # Open the CSV file and prepare the writer
     with open('telegram_data.csv', 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(['Channel Title', 'Fashiontera', 'ID', 'Message', 'Date', 'Media Path'])  # Include channel title in the header
+        writer.writerow(['Channel Title', 'ZemenExpress', 'ID', 'Message', 'Date', 'Media Path'])  # Include channel title in the header
         
         # List of channels to scrape
         channels = [
-            '@Fashiontera',  # Existing channel
+            '@ZemenExpress',  # Existing channel
                  # You can add more channels here
             
         ]
