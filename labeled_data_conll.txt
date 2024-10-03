@@ -1,0 +1,18 @@
+የቤት O
+ማብሰያ B-Product
+ዋጋ O
+1500 B-PRICE
+ብር I-PRICE
+በአዲስ O
+አበባ O
+ቦሌ B-LOC
+ሶስት O
+ካማ O
+
+ቦሌ B-LOC
+የአስቤዛ B-Product
+መሸጫ O
+ዋጋ O
+200 B-PRICE
+ብር I-PRICE
+ሸቀጥ O
