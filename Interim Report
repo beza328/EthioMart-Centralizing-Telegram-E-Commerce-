@@ -1,0 +1,42 @@
+Interim Submision
+By:- Bezawit Wondwossen
+Project Overview
+The EthioMart project aims to extract valuable insights from customer messages in Amharic related to products, locations, and pricing. The objective is to perform Named Entity Recognition (NER) using a dataset obtained from Telegram channels. This document summarizes the data preparation and labeling steps executed to achieve this goal.
+Data Preparation Steps
+1.	Data Collection:
+o	The initial dataset was sourced from various “Zemen Express” Telegram Channel, containing messages that discussed product inquiries, pricing, and locations, phone numbers, emojis,  photos, Telegram address(username).
+2.	Data Cleaning:
+Removing Unwanted Characters: Special characters such as emojis and specific unwanted phrases (e.g 
+	  'በTelegram', 'ለማዘዝ', 'ይጠቀሙ', 
+	    'zemencallcenter', 'zemenexpressadmin', 
+	    'ለተጨማሪ', 'ማብራሪያ', 'የቴሌግራም', 
+	    'ገፃችን', 'https', 'telegram', 'me', 
+	    'zemenexpress' 
+were systematically removed from the messages.
+Phone Number Removal: All phone numbers were extracted using regular expressions and eliminated to maintain privacy and focus on textual content.
+Handling Duplicate Entries: Duplicate rows based on the same message were identified and removed to ensure data uniqueness.
+Tokenization:
+Messages were tokenized to split the text into individual words. This facilitated easier processing for entity recognition and labeling.
+Preprocessing:
+All text was normalized by converting it into a consistent format, removing extraneous whitespace, and ensuring that the text was ready for labeling tasks.
+Data Labeling Steps
+Entity Classification:
+The labeling focused on identifying and classifying key entities within the messages into specific categories. The defined entity types were:
+	B-PRODUCT: The beginning of a product entity.
+	I-PRODUCT: Inside a product entity.
+	B-LOC: The beginning of a location entity.
+	I-LOC: Inside a location entity.
+	B-PRICE: The beginning of a price entity.
+	I-PRICE: Inside a price entity, excluding the number 360.
+	O: Tokens that are outside any entities.
+Labeling Procedure:
+	The first word of each message was labeled as B-PRODUCT.
+	The next three words following the first word were labeled as I-PRODUCT.
+	Specific location terms, such as "መገናኛ" and "ፒያሳ", were marked with B-LOC.
+	The following terms indicating locations were labeled as I-LOC. Such as  I-LOC ራመት_ታቦር_ኦዳ_ህንፃ, ጊዮርጊስ, አደባባይ, መሰረት, ደፋር, ሞል
+	Pricing phrases starting with "ዋጋ" and "ብር" were assigned the B-PRICE label.
+	All three-digit and above numbers were labeled as I-PRICE, excluding the specific case of 360.
+Sample Output:
+The labeled data was saved in the CoNLL format, ensuring each token was labeled on a new line, with blank lines separating different messages for clarity.
+Conclusion
+The data preparation and labeling steps have set a strong foundation for the NER model. The cleaned dataset, free of unwanted characters and duplicates, combined with a structured labeling scheme, allows for effective training and evaluation of models aimed at recognizing and categorizing key entities within  messages. The project is progressing towards its next phase, where machine learning techniques will be applied to further analyze.
